@@ -18,7 +18,8 @@ export default function Container(){
 
     return(
         <div>
-        <h1>Score: {score}</h1>
+            <h1>Memory Card</h1>            
+            <h2>Score: {score}</h2>
             <Card onCardClick = {handleCardClick}/>
         </div>
     )

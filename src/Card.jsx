@@ -41,7 +41,6 @@ function Card({onCardClick}){
 
     return(
         <div>
-            <h1>Memory Card</h1>
             <div className="card-list">
                 {cards.length > 0 ? (
                     cards.map((card)=>(

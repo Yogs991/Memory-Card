@@ -11,8 +11,8 @@ body{
 
 .card-list{
   display: grid;
-  grid-template-columns: repeat(4, 200px);
-  grid-template-rows: repeat(2, 200px);
+  grid-template-columns: repeat(4, 300px);
+  grid-template-rows: repeat(2, 300px);
   gap: 10px;
 }
 
@@ -20,6 +20,11 @@ body{
   display: block;
   box-sizing: border-box;
   box-shadow: 0 4px 8px #00000040;
+  color: black;
+}
+
+h1, h2{
+  font-size: 30px;
   color: black;
 }
 
