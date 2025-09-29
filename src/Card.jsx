@@ -1,9 +1,5 @@
 /* 
     --Project Breakdown--
-    `)use hooks useState and useEffect to fetch pokeapi pokemon
-    2)limit should be 12, offset 0
-    3)API should bring 12 random pokemon from the first 151
-    4)pokemon cards should have a onClick attribute so it can shuffle and bring 12 random pokemon with duplicates allowed
     5)track current score
     6)track best score if(currentScore > bestScore){ bestScore = currentScore; }
     7)if you click the same pokemon twice currentScore = 0;
@@ -15,8 +11,10 @@
 import { useState, useEffect } from "react";
 
 
-function Card(){
+function Card({onCardClick}){
     const [cards, setCards] = useState([]);
+    const [refresh, setRefresh] = useState(0);
+
     useEffect(()=>{
         
         const fetchData =  async ()=>{
@@ -31,7 +29,7 @@ function Card(){
                     })
                 );
                 const shuffle = detailedData.sort(()=>0.5 - Math.random());
-                const shuffledPokemon = shuffle.slice(0, 10);
+                const shuffledPokemon = shuffle.slice(0, 8);
                 setCards(shuffledPokemon);
                 console.log("Detailed Data:", detailedData);
             }catch(error){
@@ -39,22 +37,29 @@ function Card(){
             }
         }
         fetchData();
-    },[]);
+    },[refresh]);
 
     return(
         <div>
             <h1>Memory Card</h1>
             <div className="card-list">
-            {cards.length > 0 ? (
-                cards.map((card, index)=>(
-                    <div key={index} className="card">
-                        <h2>{card.name}</h2>
-                        <img src={card.sprites.front_default} alt={card.name}/>
-                    </div>                    
-                ))
-            ):(
-                "Loading..."
-            )}
+                {cards.length > 0 ? (
+                    cards.map((card)=>(
+                        <div key={card.id} className="card">
+                            <h2>{card.name} #{card.id}</h2>
+                            <img 
+                            src={card.sprites.front_default} 
+                            alt={card.name} 
+                            onClick={()=>{
+                                onCardClick(card.id);
+                                setRefresh((prev)=>prev+1);
+                            }}                            
+                            />
+                        </div>                    
+                    ))
+                ):(
+                    "Loading..."
+                )}
             </div>
         </div>
     );

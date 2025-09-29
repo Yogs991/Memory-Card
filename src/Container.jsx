@@ -1,0 +1,25 @@
+import Card from "./Card";
+import { useState } from "react";
+
+export default function Container(){
+
+    const [score, setScore] = useState(0);
+    const [clickedCards, setClickedCards] = useState([]);
+
+    const handleCardClick = (id)=>{
+        if(!clickedCards.includes(id)){
+            setScore((prev)=>prev + 1);
+            setClickedCards((prev)=>[...prev, id]);
+        }else{
+            setScore(0);
+            setClickedCards([]);
+        }
+    };
+
+    return(
+        <div>
+        <h1>Score: {score}</h1>
+            <Card onCardClick = {handleCardClick}/>
+        </div>
+    )
+}

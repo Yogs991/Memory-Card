@@ -1,9 +1,9 @@
-import Card from "./Card";
+import Container from "./Container";
 import "./App.css";
 
 function App() {
     return(
-        <Card />
+        <Container />
     )
 }
 
